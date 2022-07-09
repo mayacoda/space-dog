@@ -6,14 +6,15 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
 
 export const loadCharacter = async () => {
   const loadingManager = new THREE.LoadingManager()
-  return await loadWithPhongMaterials(loadingManager)
-  // return await loadWithStandardMaterials(loadingManager)
+  // return await loadWithPhongMaterials(loadingManager)
+  return await loadWithStandardMaterials(loadingManager)
 }
 
 /**
  * Loads the character using the MTL and OBJ loaders,
  * materials default to MeshPhongMaterial
  */
+//@ts-ignore
 const loadWithPhongMaterials = async (loadingManager: THREE.LoadingManager) => {
   const objLoader = new OBJLoader(loadingManager)
   const mtlLoader = new MTLLoader(loadingManager)
@@ -83,11 +84,18 @@ const loadWithStandardMaterials = async (loadingManger: THREE.LoadingManager) =>
   helmetMesh.material.opacity = 0.4
 
   const gui = getDebugUi()
-  gui.add(collarMaterial, 'metalness').min(0).max(1).step(0.0001).name('collar metalness')
-  gui.add(collarMaterial, 'roughness').min(0).max(1).step(0.0001).name('collar roughness')
-  gui.add(helmetMaterial, 'metalness').min(0).max(1).step(0.0001).name('helmet metalness')
-  gui.add(helmetMaterial, 'roughness').min(0).max(1).step(0.0001).name('helmet roughness')
-  gui.add(helmetMaterial, 'opacity').min(0).max(1).step(0.0001).name('helmet opacity')
+  const materialsFolder = gui.addFolder('Materials')
+  materialsFolder.close()
+
+  materialsFolder.add(collarMaterial, 'metalness').min(0).max(1).step(0.0001).name(
+    'collar metalness')
+  materialsFolder.add(collarMaterial, 'roughness').min(0).max(1).step(0.0001).name(
+    'collar roughness')
+  materialsFolder.add(helmetMaterial, 'metalness').min(0).max(1).step(0.0001).name(
+    'helmet metalness')
+  materialsFolder.add(helmetMaterial, 'roughness').min(0).max(1).step(0.0001).name(
+    'helmet roughness')
+  materialsFolder.add(helmetMaterial, 'opacity').min(0).max(1).step(0.0001).name('helmet opacity')
 
   return spaceDog
 }
