@@ -7,7 +7,7 @@ import { getDebugUi } from '../utils/debug-ui'
 export function createLights(scene: THREE.Scene) {
 
   // Ambient light
-  const ambientLight = new THREE.AmbientLight(0xc1bfdf, 1)
+  const ambientLight = new THREE.AmbientLight(0xb7b6c9, 1.4)
 
   // First point light
   const planetLight = new THREE.PointLight(0xf9ca48, 2.4)

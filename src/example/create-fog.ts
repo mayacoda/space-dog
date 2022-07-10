@@ -1,19 +1,18 @@
 import * as THREE from 'three'
 import { getDebugUi } from '../utils/debug-ui'
 
-export function createFog(renderer: THREE.WebGLRenderer, scene: THREE.Scene) {
+export function createFog(scene: THREE.Scene) {
   const params = {
-    fogColor: 0x02012d
+    fogColor: 0x740707
   }
-  renderer.setClearColor(params.fogColor, 1)
 
   const fog = new THREE.Fog(params.fogColor, 8.4, 17.4)
   scene.fog = fog
 
   const gui = getDebugUi()
   const fogFolder = gui.addFolder('Fog')
+  fogFolder.close()
   fogFolder.addColor(params, 'fogColor').name('color').onChange(() => {
-    renderer.setClearColor(params.fogColor, 1)
     fog.color.set(params.fogColor)
   })
   fogFolder.add(fog, 'near').min(0).max(20).step(0.1).name('near')
