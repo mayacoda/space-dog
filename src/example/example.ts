@@ -69,6 +69,7 @@ export const runExample = async () => {
   const controls = new OrbitControls(camera, canvas)
   controls.enableZoom = false
   controls.enableDamping = true
+  controls.enablePan = false
   // controls.autoRotate = true
 
   // Render loop
